@@ -1,0 +1,245 @@
+{
+	"arreglo_preguntas":
+	[
+		{
+			"texto":"1M) ¿En qué juego de la franquicia de Zelda se utiliza un instrumento musical como arma principal en lugar de una espada?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"The Legend of Zelda: Oracle of Ages",
+				    	"correct":true
+					},
+					{
+						"texto":"The Legend of Zelda: Link's Awakening",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Oracle of Seasons",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Phantom Hourglass",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 200,
+			"dificultad": 2
+		},
+		{
+			"texto":"2) ¿Cuál es el nombre de la raza recurrente de personas con forma de pájaro en la franquicia de Zelda?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Rito",
+				    	"correct":true
+					},
+					{
+						"texto":"Zora",
+				    	"correct":false
+					},
+					{
+						"texto":"Goron",
+				    	"correct":false
+					},
+					{
+						"texto":"Sheikah",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 200,
+			"dificultad": 2
+		},
+		{
+			"texto":"3) ¿Qué juego de la franquicia de Zelda introdujo el concepto de recolectar máscaras para transformarse en diferentes criaturas?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"The Legend of Zelda: Majora's Mask",
+				    	"correct":true
+					},
+					{
+						"texto":"The Legend of Zelda: A Link to the Past",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: The Wind Waker",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Twilight Princess",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 200,
+			"dificultad": 2
+		},
+		{
+			"texto":"4) ¿Cuál es el nombre de la legendaria espada que empuña Link en muchos de los juegos de Zelda?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Master Sword",
+				    	"correct":true
+					},
+					{
+						"texto":"Excalibur",
+				    	"correct":false
+					},
+					{
+						"texto":"Vorpal Sword",
+				    	"correct":false
+					},
+					{
+						"texto":"Ragnarok",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 200,
+			"dificultad": 2
+		},
+		{
+			"texto":"5) ¿En qué juego de la franquicia de Zelda se presenta un estilo artístico único que se asemeja a una pintura acuarela?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"The Legend of Zelda: Skyward Sword",
+				    	"correct":true
+					},
+					{
+						"texto":"The Legend of Zelda: Breath of the Wild",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: The Wind Waker",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Twilight Princess",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 200,
+			"dificultad": 2
+		},
+		{
+			"texto":"6) ¿Cuál es el nombre del poderoso artefacto mágico que concede deseos a quien lo posea en la franquicia de Zelda?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Trifuerza",
+				    	"correct":true
+					},
+					{
+						"texto":"Piedras de fuerza",
+				    	"correct":false
+					},
+					{
+						"texto":"Rupias",
+				    	"correct":false
+					},
+					{
+						"texto":"Contenedores de corazón",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 200,
+			"dificultad": 2
+		},
+		{
+			"texto":"7) ¿Qué juego de la franquicia de Zelda introdujo el concepto de que un segundo jugador controle a un personaje acompañante?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"The Legend of Zelda: Four Swords",
+				    	"correct":true
+					},
+					{
+						"texto":"The Legend of Zelda: Oracle of Ages",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Oracle of Seasons",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: A Link to the Past",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 200,
+			"dificultad": 2
+		},
+		{
+			"texto":"8) ¿Cuál es el nombre del señor demonio que sirve como el principal antagonista en The Legend of Zelda: Skyward Sword?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Ghirahim",
+				    	"correct":true
+					},
+					{
+						"texto":"Vaati",
+				    	"correct":false
+					},
+					{
+						"texto":"Demise",
+				    	"correct":false
+					},
+					{
+						"texto":"Zant",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 200,
+			"dificultad": 2
+		},
+		{
+			"texto":"9) ¿En qué juego de la franquicia de Zelda se presenta un diseño de mundo abierto con juego no lineal y un vasto mundo explorable?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"The Legend of Zelda: Breath of the Wild",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Ocarina of Time",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Twilight Princess",
+				    	"correct":true
+					},
+					{
+						"texto":"The Legend of Zelda: Majora's Mask",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 200,
+			"dificultad": 2
+		},
+		{
+			"texto":"10) ¿Cuál es el nombre del héroe legendario que empuña la Master Sword en la franquicia de Zelda?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Link",
+				    	"correct":true
+					},
+					{
+						"texto":"Zelda",
+				    	"correct":false
+					},
+					{
+						"texto":"Ganon",
+				    	"correct":false
+					},
+					{
+						"texto":"Hylia",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 200,
+			"dificultad": 2
+		}
+	]
+}

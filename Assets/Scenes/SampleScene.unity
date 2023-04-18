@@ -1483,7 +1483,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pantalla_principal: {fileID: 839078672}
   pantalla_juego: {fileID: 480501545}
-  archivo_preguntar: {fileID: 4900000, guid: 6bfd8e2248c6c234b823b0baec5e4f25, type: 3}
+  archivo_easy: {fileID: 4900000, guid: 6bfd8e2248c6c234b823b0baec5e4f25, type: 3}
+  archivo_medium: {fileID: 4900000, guid: 4110ca6ccd0240b49bbc904edad24982, type: 3}
+  archivo_hard: {fileID: 4900000, guid: e62d1ffca629f334b93f41f15798c481, type: 3}
 --- !u!1 &1163741622
 GameObject:
   m_ObjectHideFlags: 0

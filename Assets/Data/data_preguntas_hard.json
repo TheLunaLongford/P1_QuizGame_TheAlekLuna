@@ -1,0 +1,245 @@
+{
+	"arreglo_preguntas":
+	[
+		{
+			"texto":"1H) ¿Cuál es el nombre del legendario caballero que fundó Hyrule en la mitología de la franquicia de Zelda?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Hylia",
+				    	"correct":true
+					},
+					{
+						"texto":"Link",
+				    	"correct":false
+					},
+					{
+						"texto":"Demise",
+				    	"correct":false
+					},
+					{
+						"texto":"Farore",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 300,
+			"dificultad": 3
+		},
+		{
+			"texto":"2) ¿Qué personaje de la franquicia de Zelda fue originalmente concebido como la identidad secreta de Zelda, pero luego se convirtió en un personaje separado en su propia mitología?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Sheik",
+				    	"correct":true
+					},
+					{
+						"texto":"Impa",
+				    	"correct":false
+					},
+					{
+						"texto":"Tetra",
+				    	"correct":false
+					},
+					{
+						"texto":"Midna",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 300,
+			"dificultad": 3
+		},
+		{
+			"texto":"3) ¿Cuál es el nombre del personaje que Link ayuda a salvar en el juego de la franquicia de Zelda, Oracle of Ages?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Nayru",
+				    	"correct":true
+					},
+					{
+						"texto":"Zelda",
+				    	"correct":false
+					},
+					{
+						"texto":"Impa",
+				    	"correct":false
+					},
+					{
+						"texto":"Din",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 300,
+			"dificultad": 3
+		},
+		{
+			"texto":"4) ¿En qué juego de la franquicia de Zelda se presenta una mazmorra gigante que se puede rotar y manipular para resolver acertijos?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"The Legend of Zelda: Twilight Princess",
+				    	"correct":true
+					},
+					{
+						"texto":"The Legend of Zelda: Oracle of Seasons",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Skyward Sword",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Ocarina of Time",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 300,
+			"dificultad": 3
+		},
+		{
+			"texto":"5) ¿Cuál es el nombre del personaje no jugable que ayuda a Link durante su aventura en el juego de la franquicia de Zelda, Majora's Mask?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Tingle",
+				    	"correct":true
+					},
+					{
+						"texto":"Epona",
+				    	"correct":false
+					},
+					{
+						"texto":"Skull Kid",
+				    	"correct":false
+					},
+					{
+						"texto":"Midna",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 300,
+			"dificultad": 3
+		},
+		{
+			"texto":"6) ¿Cuál es el nombre de la misteriosa entidad que aparece en múltiples juegos de la franquicia de Zelda y se dice que concede deseos a quienes lo encuentran?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"La Mano del Destino",
+				    	"correct":true
+					},
+					{
+						"texto":"Las Diosas",
+				    	"correct":false
+					},
+					{
+						"texto":"El Oráculo",
+				    	"correct":false
+					},
+					{
+						"texto":"El Vendedor de Máscaras",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 300,
+			"dificultad": 3
+		},
+		{
+			"texto":"7) ¿Cuál es el nombre de la raza mística que habita en el mundo subterráneo en el juego de la franquicia de Zelda, A Link to the Past?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Dark World inhabitants",
+				    	"correct":true
+					},
+					{
+						"texto":"Gerudo",
+				    	"correct":false
+					},
+					{
+						"texto":"Zuna",
+				    	"correct":false
+					},
+					{
+						"texto":"Twili",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 300,
+			"dificultad": 3
+		},
+		{
+			"texto":"8) ¿Qué personaje de la franquicia de Zelda es conocido por ser el hermano mayor de Link y uno de los principales antagonistas en algunos juegos?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Ravio",
+				    	"correct":true
+					},
+					{
+						"texto":"Vaati",
+				    	"correct":false
+					},
+					{
+						"texto":"Ghirahim",
+				    	"correct":false
+					},
+					{
+						"texto":"Zant",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 300,
+			"dificultad": 3
+		},
+		{
+			"texto":"9) ¿Cuál es el nombre del jefe final en el juego de la franquicia de Zelda, The Wind Waker?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Ganondorf",
+				    	"correct":true
+					},
+					{
+						"texto":"Vaati",
+				    	"correct":false
+					},
+					{
+						"texto":"Bellum",
+				    	"correct":false
+					},
+					{
+						"texto":"Phantom Ganon",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 300,
+			"dificultad": 3
+		},
+		{
+			"texto":"10) ¿En qué juego de la franquicia de Zelda se presenta un mundo dividido en dos dimensiones, cada una de las cuales debe explorarse y manipularse para avanzar en el juego?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"The Legend of Zelda: A Link to the Past",
+				    	"correct":true
+					},
+					{
+						"texto":"The Legend of Zelda: Oracle of Ages",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Spirit Tracks",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Phantom Hourglass",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 300,
+			"dificultad": 3
+		}
+	]
+}

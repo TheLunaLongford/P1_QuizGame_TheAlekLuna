@@ -1,0 +1,245 @@
+{
+	"arreglo_preguntas":
+	[
+		{
+			"texto":"1E) ¿Cuál es el nombre del protagonista en la serie Legend of Zelda?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Link",
+				    	"correct":true
+					},
+					{
+						"texto":"Zelda",
+				    	"correct":false
+					},
+					{
+						"texto":"Ganon",
+				    	"correct":false
+					},
+					{
+						"texto":"Navi",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 100,
+			"dificultad": 1
+		},
+		{
+			"texto":"2) ¿Qué juego en la franquicia de Zelda fue el primero en presentar gráficos 3D?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"The Legend of Zelda: Ocarina of Time",
+				    	"correct":true
+					},
+					{
+						"texto":"The Legend of Zelda: A Link to the Past",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Breath of the Wild",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Skyward Sword",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 100,
+			"dificultad": 1
+		},
+		{
+			"texto":"3) ¿Cuál es el nombre del villano en la serie Legend of Zelda?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Ganon",
+				    	"correct":true
+					},
+					{
+						"texto":"Link",
+				    	"correct":false
+					},
+					{
+						"texto":"Zelda",
+				    	"correct":false
+					},
+					{
+						"texto":"Navi",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 100,
+			"dificultad": 1
+		},
+		{
+			"texto":"4) ¿Qué juego en la franquicia de Zelda introdujo el concepto de viajes en el tiempo?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"The Legend of Zelda: Ocarina of Time",
+				    	"correct":true
+					},
+					{
+						"texto":"The Legend of Zelda: Twilight Princess",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Majora's Mask",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Wind Waker",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 100,
+			"dificultad": 1
+		},
+		{
+			"texto":"5) ¿Cuál es el nombre del instrumento principal en The Legend of Zelda: Ocarina of Time?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Flauta",
+				    	"correct":true
+					},
+					{
+						"texto":"Arpa",
+				    	"correct":false
+					},
+					{
+						"texto":"Ocarina",
+				    	"correct":false
+					},
+					{
+						"texto":"Guitarra",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 100,
+			"dificultad": 1
+		},
+		{
+			"texto":"6) ¿Cuál es el nombre de la princesa en la serie Legend of Zelda?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Zelda",
+				    	"correct":true
+					},
+					{
+						"texto":"Peach",
+				    	"correct":false
+					},
+					{
+						"texto":"Daisy",
+				    	"correct":false
+					},
+					{
+						"texto":"Rosalina",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 100,
+			"dificultad": 1
+		},
+		{
+			"texto":"7) ¿Cuál es el nombre de la tierra en la que ocurre la serie Legend of Zelda?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Hyrule",
+				    	"correct":true
+					},
+					{
+						"texto":"Reino Champiñón",
+				    	"correct":false
+					},
+					{
+						"texto":"Kanto",
+				    	"correct":false
+					},
+					{
+						"texto":"Dreamland",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 100,
+			"dificultad": 1
+		},
+		{
+			"texto":"8) ¿Qué juego en la franquicia de Zelda introdujo el concepto de dimensiones alternas?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"The Legend of Zelda: A Link to The Past",
+				    	"correct":true
+					},
+					{
+						"texto":"The Legend of Zelda: Skyward Sword",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: The Wind Waker",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Majora's Mask",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 100,
+			"dificultad": 1
+		},
+		{
+			"texto":"9) ¿Cuál es el nombre del hada acompañante en The Legend of Zelda: Ocarina of Time?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"Tatl",
+				    	"correct":false
+					},
+					{
+						"texto":"Fi",
+				    	"correct":false
+					},
+					{
+						"texto":"Navi",
+				    	"correct":true
+					},
+					{
+						"texto":"Midna",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 100,
+			"dificultad": 1
+		},
+		{
+			"texto":"10) ¿Qué juego en la franquicia de Zelda introdujo el concepto de encoger y agrandar el tamaño de Link?",
+			"arreglo_respuestas":
+				[
+					{
+						"texto":"The Legend of Zelda: The Minish Cap",
+				    	"correct":true
+					},
+					{
+						"texto":"The Legend of Zelda: Twilight Princess",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Majora's Mask",
+				    	"correct":false
+					},
+					{
+						"texto":"The Legend of Zelda: Skyward Sword",
+				    	"correct":false
+					}
+				],
+			"valor_pregunta": 100,
+			"dificultad": 1
+		}
+	]
+}
