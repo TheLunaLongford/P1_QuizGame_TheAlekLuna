@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class main_screen : MonoBehaviour
 {
-    // UI Elements
+    // UI Elements : Canvas
     public Canvas pantalla_principal;
     public Canvas pantalla_juego;
-    // public List<pregunta> mi_pregunta = new List<pregunta>();
+    public Canvas pantalla_dificultad;
+    public Canvas pantalla_score;
+
+    // UI Elements : Buttons
+    // public GameObject boton_empezar;
+
 
     // Data Elements
     public TextAsset archivo_easy;
@@ -18,6 +23,35 @@ public class main_screen : MonoBehaviour
     string texto_preguntas_easy;
     string texto_preguntas_medium;
     string texto_preguntas_hard;
+
+    public void comenzar_juego()
+    {
+        pantalla_juego.gameObject.SetActive(true);
+        pantalla_principal.gameObject.SetActive(false);
+        pantalla_dificultad.gameObject.SetActive(false);
+        //pantalla_score.gameObject.SetActive(false);
+    }
+    public void regresar_home()
+    {
+        pantalla_juego.gameObject.SetActive(false);
+        pantalla_principal.gameObject.SetActive(true);
+        pantalla_dificultad.gameObject.SetActive(false);
+        //pantalla_score.gameObject.SetActive(false);
+    }
+    public void seleccion_dificultad()
+    {
+        pantalla_juego.gameObject.SetActive(false);
+        pantalla_principal.gameObject.SetActive(false);
+        pantalla_dificultad.gameObject.SetActive(true);
+        //pantalla_score.gameObject.SetActive(false);
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        cargar_preguntas();
+        regresar_home();
+    }
     public void cargar_preguntas()
     {
         texto_preguntas_easy = archivo_easy.text;
@@ -25,7 +59,6 @@ public class main_screen : MonoBehaviour
         texto_preguntas_hard = archivo_hard.text;
         if (texto_preguntas_easy != "" & texto_preguntas_medium != "" & texto_preguntas_hard != "")
         {
-            // Debug.Log(texto_preguntas);
             json_2_objetos();
         }
         else
@@ -36,8 +69,6 @@ public class main_screen : MonoBehaviour
 
     void json_2_objetos()
     {
-        //pregunta nueva_pregunta = JsonUtility.FromJson<pregunta>(texto_preguntas);
-        //DumpToConsole(mi_pregunta);
         cuestionario cuestionario_easy = JsonUtility.FromJson<cuestionario>(texto_preguntas_easy);
         DumpToConsole(cuestionario_easy);
         cuestionario cuestionario_medium = JsonUtility.FromJson<cuestionario>(texto_preguntas_medium);
@@ -46,13 +77,7 @@ public class main_screen : MonoBehaviour
         DumpToConsole(cuestionario_hard);
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        cargar_preguntas();
-        //json_2_objetos();
-    }
+    // Utilities
     public static void DumpToConsole(cuestionario p)
     {
         var output = JsonUtility.ToJson(p, true);
