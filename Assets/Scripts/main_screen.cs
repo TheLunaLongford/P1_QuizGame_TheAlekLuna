@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class main_screen : MonoBehaviour
 {
@@ -24,20 +25,25 @@ public class main_screen : MonoBehaviour
     string texto_preguntas_medium;
     string texto_preguntas_hard;
 
-    public void comenzar_juego()
-    {
-        pantalla_juego.gameObject.SetActive(true);
-        pantalla_principal.gameObject.SetActive(false);
-        pantalla_dificultad.gameObject.SetActive(false);
-        //pantalla_score.gameObject.SetActive(false);
-    }
-    public void regresar_home()
-    {
-        pantalla_juego.gameObject.SetActive(false);
-        pantalla_principal.gameObject.SetActive(true);
-        pantalla_dificultad.gameObject.SetActive(false);
-        //pantalla_score.gameObject.SetActive(false);
-    }
+    cuestionario cuestionario_easy;
+    cuestionario cuestionario_medium;
+    cuestionario cuestionario_hard;
+
+    cuestionario quiz;
+    int actual_question_numero;
+
+    public TextMeshProUGUI pregunta;
+    public TextMeshProUGUI res_1;
+    public TextMeshProUGUI res_2;
+    public TextMeshProUGUI res_3;
+    public TextMeshProUGUI res_4;
+    public TextMeshProUGUI puntuacion;
+
+    public Button button_res_1;
+    public Button button_res_2;
+    public Button button_res_3;
+    public Button button_res_4;
+
     public void seleccion_dificultad()
     {
         pantalla_juego.gameObject.SetActive(false);
@@ -45,7 +51,166 @@ public class main_screen : MonoBehaviour
         pantalla_dificultad.gameObject.SetActive(true);
         //pantalla_score.gameObject.SetActive(false);
     }
+    public void comenzar_juego()
+    {
+        pantalla_juego.gameObject.SetActive(true);
+        pantalla_principal.gameObject.SetActive(false);
+        pantalla_dificultad.gameObject.SetActive(false);
+        //pantalla_score.gameObject.SetActive(false);
 
+        // Dependiente de que difultad fue elegida, se cargara un archivo de preguntas u otro
+        string button_name = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
+        switch (button_name)
+        {
+            case "button_easy":
+                quiz = cuestionario_easy;
+                break;
+
+            case "button_medium":
+                quiz = cuestionario_medium;
+                break;
+
+            case "button_hard":
+                quiz = cuestionario_hard;
+                break;
+        }
+
+        quiz = shuffle_quiz(quiz);
+        actual_question_numero = 0;
+        poner_pregunta(actual_question_numero);
+        DumpToConsole(quiz);
+    }
+
+    public void poner_pregunta(int numero_pregunta)
+    {
+        pregunta pregunta_random = quiz.arreglo_preguntas[numero_pregunta];
+        int numero_respuestas = pregunta_random.arreglo_respuestas.Length;
+        int[] indices = shuffle_range(numero_respuestas);
+
+        llenar_pregunta(pregunta_random, indices);
+        ajustar_colores_botones(indices);
+        centrar_botones();
+        ubicar_botones();
+        actual_question_numero += 1;
+    }
+
+    public void click_respuesta()
+    {
+        poner_pregunta(actual_question_numero);
+        if (actual_question_numero == 10)
+        {
+
+        }
+    }
+
+    public void llenar_pregunta(pregunta pregunta_en_turno, int[] orden)
+    {
+        pregunta.SetText(pregunta_en_turno.texto);
+        res_1.SetText(pregunta_en_turno.arreglo_respuestas[orden[0] - 1].texto);
+        res_2.SetText(pregunta_en_turno.arreglo_respuestas[orden[1] - 1].texto);
+        res_3.SetText(pregunta_en_turno.arreglo_respuestas[orden[2] - 1].texto);
+        res_4.SetText(pregunta_en_turno.arreglo_respuestas[orden[3] - 1].texto);
+    }
+
+    public void ajustar_colores_botones(int[] indices)
+    {
+        colores_por_default_();
+        set_colores_respuestas(indices);
+    }
+
+    public Color get_colores_respuestas(int id_respuesta)
+    {
+        bool es_correcto = quiz.arreglo_preguntas[actual_question_numero].arreglo_respuestas[id_respuesta].correct;
+        if (es_correcto)
+        {
+            return Color.green;
+        }
+        return Color.red;
+    }
+    public void set_colores_respuestas(int[] indices)
+    {
+        ColorBlock cb;
+        cb = button_res_1.colors;
+        cb.pressedColor = get_colores_respuestas(indices[0]-1);
+        button_res_1.colors = cb;
+
+        cb = button_res_1.colors;
+        cb.pressedColor = get_colores_respuestas(indices[1]-1);
+        button_res_2.colors = cb;
+
+        cb = button_res_1.colors;
+        cb.pressedColor = get_colores_respuestas(indices[2]-1);
+        button_res_3.colors = cb;
+
+        cb = button_res_1.colors;
+        cb.pressedColor = get_colores_respuestas(indices[3]-1);
+        button_res_4.colors = cb;
+    }
+
+    public void colores_por_default_()
+    {
+        ColorBlock cb;
+        cb = button_res_1.colors;
+        cb.pressedColor = Color.gray;
+        button_res_1.colors = cb;
+
+        cb = button_res_1.colors;
+        cb.pressedColor = Color.gray;
+        button_res_2.colors = cb;
+
+        cb = button_res_1.colors;
+        cb.pressedColor = Color.gray;
+        button_res_3.colors = cb;
+
+        cb = button_res_1.colors;
+        cb.pressedColor = Color.gray;
+        button_res_4.colors = cb;
+    }
+
+    public void centrar_botones()
+    {
+        pantalla_juego.transform.GetChild(2).Translate(-200.0f, -40.0f, 0.0f, Space.World);
+        pantalla_juego.transform.GetChild(3).Translate(200.0f, -40.0f, 0.0f, Space.World);
+        pantalla_juego.transform.GetChild(4).Translate(-200.0f, -100.0f, 0.0f, Space.World);
+        pantalla_juego.transform.GetChild(5).Translate(200.0f, -100.0f, 0.0f, Space.World);
+    }
+
+    public void ubicar_botones()
+    {
+        pantalla_juego.transform.GetChild(2).Translate(200.0f, 40.0f, 0.0f, Space.World);
+        pantalla_juego.transform.GetChild(3).Translate(-200.0f, 40.0f, 0.0f, Space.World);
+        pantalla_juego.transform.GetChild(4).Translate(200.0f, 100.0f, 0.0f, Space.World);
+        pantalla_juego.transform.GetChild(5).Translate(-200.0f, 100.0f, 0.0f, Space.World);
+    }
+
+    public cuestionario shuffle_quiz(cuestionario quiz)
+    {
+        int numero_preguntas = quiz.arreglo_preguntas.Length;
+        int[] indices = shuffle_range(numero_preguntas);
+
+        // Vaciar preguntas mezcladas
+        cuestionario shuffle_quiz = new cuestionario();
+        for (int i = 0; i<= numero_preguntas-1; i++)
+        {
+            shuffle_quiz.arreglo_preguntas[i] = quiz.arreglo_preguntas[indices[i]-1]; 
+        }
+
+        return shuffle_quiz;
+    }
+
+
+
+
+
+
+
+    public void regresar_home()
+    {
+        pantalla_juego.gameObject.SetActive(false);
+        pantalla_principal.gameObject.SetActive(true);
+        pantalla_dificultad.gameObject.SetActive(false);
+        //pantalla_score.gameObject.SetActive(false);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -69,12 +234,12 @@ public class main_screen : MonoBehaviour
 
     void json_2_objetos()
     {
-        cuestionario cuestionario_easy = JsonUtility.FromJson<cuestionario>(texto_preguntas_easy);
-        DumpToConsole(cuestionario_easy);
-        cuestionario cuestionario_medium = JsonUtility.FromJson<cuestionario>(texto_preguntas_medium);
-        DumpToConsole(cuestionario_medium);
-        cuestionario cuestionario_hard = JsonUtility.FromJson<cuestionario>(texto_preguntas_hard);
-        DumpToConsole(cuestionario_hard);
+        cuestionario_easy = JsonUtility.FromJson<cuestionario>(texto_preguntas_easy);
+        // DumpToConsole(cuestionario_easy);
+        cuestionario_medium = JsonUtility.FromJson<cuestionario>(texto_preguntas_medium);
+        //DumpToConsole(cuestionario_medium);
+        cuestionario_hard = JsonUtility.FromJson<cuestionario>(texto_preguntas_hard);
+        //DumpToConsole(cuestionario_hard);
     }
 
     // Utilities
@@ -82,5 +247,24 @@ public class main_screen : MonoBehaviour
     {
         var output = JsonUtility.ToJson(p, true);
         Debug.Log(output);
+    }
+
+    public int[] shuffle_range(int longitud)
+    {
+        int[] indices = new int[longitud];
+        // Obtener el rango de 0 a 9
+        for (int i = 1; i <= longitud; i++)
+        {
+            indices[i - 1] = i;
+        }
+        // Mezclando los elementos del rango
+        for (int i = longitud; i >= 1; i--)
+        {
+            int j = Random.Range(0, i);
+            int aux = indices[j];
+            indices[j] = indices[i - 1];
+            indices[i - 1] = aux;
+        }
+        return indices;
     }
 }
