@@ -199,7 +199,7 @@
 				[
 					{
 						"texto":"The Legend of Zelda: Breath of the Wild",
-				    	"correct":false
+				    	"correct":true
 					},
 					{
 						"texto":"The Legend of Zelda: Ocarina of Time",
@@ -207,7 +207,7 @@
 					},
 					{
 						"texto":"The Legend of Zelda: Twilight Princess",
-				    	"correct":true
+				    	"correct":false
 					},
 					{
 						"texto":"The Legend of Zelda: Majora's Mask",

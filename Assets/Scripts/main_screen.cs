@@ -14,7 +14,10 @@ public class main_screen : MonoBehaviour
 
     // UI Elements : Buttons
     // public GameObject boton_empezar;
-
+    public Button button_res_1;
+    public Button button_res_2;
+    public Button button_res_3;
+    public Button button_res_4;
 
     // Data Elements
     public TextAsset archivo_easy;
@@ -32,22 +35,26 @@ public class main_screen : MonoBehaviour
     cuestionario quiz;
     int actual_question_numero;
 
+    // TMP Elements
     public TextMeshProUGUI pregunta;
     public TextMeshProUGUI res_1;
     public TextMeshProUGUI res_2;
     public TextMeshProUGUI res_3;
     public TextMeshProUGUI res_4;
-    
-    public Button button_res_1;
-    public Button button_res_2;
-    public Button button_res_3;
-    public Button button_res_4;
 
-    public TextMeshProUGUI puntuacion;
+    // Score Elements
     int puntuacion_juego_actual;
-
+    int pregunta_actual;
+    public TextMeshProUGUI puntuacion;
     public TextMeshProUGUI puntuacion_final;
     public TextMeshProUGUI record;
+
+    // Additional stuff
+    public Button dummy;
+    bool segunda_oportunidad;
+    double multiplicador_puntuacion;
+    public Button omitir;
+    public Button terminar;
 
     public void seleccion_dificultad()
     {
@@ -96,15 +103,17 @@ public class main_screen : MonoBehaviour
         puntuacion_juego_actual = 0;
         puntuacion.SetText(puntuacion_juego_actual.ToString());
 
-        poner_pregunta(actual_question_numero);
+        poner_pregunta();
         //DumpToConsole(quiz);
     }
 
-    public void poner_pregunta(int numero_pregunta)
+    public void poner_pregunta()
     {
+        dummy.Select();
+        desbloquear_botones();
         if (actual_question_numero < 10)
         {
-            pregunta pregunta_random = quiz.arreglo_preguntas[numero_pregunta];
+            pregunta pregunta_random = quiz.arreglo_preguntas[actual_question_numero];
             int numero_respuestas = pregunta_random.arreglo_respuestas.Length;
             int[] indices = shuffle_range(numero_respuestas);
 
@@ -112,7 +121,9 @@ public class main_screen : MonoBehaviour
             ajustar_colores_botones(indices);
             centrar_botones();
             ubicar_botones();
+            segunda_oportunidad = true;
             actual_question_numero += 1;
+            multiplicador_puntuacion = 1;
         }
         else
         {
@@ -125,10 +136,46 @@ public class main_screen : MonoBehaviour
         GameObject boton_clickeado = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         if (boton_clickeado.GetComponent<data_pregunta>().correcto)
         {
-            puntuacion_juego_actual += boton_clickeado.GetComponent<data_pregunta>().valor_puntos;
+            puntuacion_juego_actual +=  (int)((double)boton_clickeado.GetComponent<data_pregunta>().valor_puntos * multiplicador_puntuacion);
             puntuacion.SetText(puntuacion_juego_actual.ToString());
-        }    
-        poner_pregunta(actual_question_numero);
+            bloquear_botones();
+            Invoke("poner_pregunta", 2);
+        }
+        else
+        {
+            if (segunda_oportunidad)
+            {
+                segunda_oportunidad = false;
+                boton_clickeado.GetComponent<Button>().interactable = false;
+                multiplicador_puntuacion = 0.25;
+            }
+            else
+            {
+                multiplicador_puntuacion = -0.25;
+                puntuacion_juego_actual += (int)((double)boton_clickeado.GetComponent<data_pregunta>().valor_puntos * multiplicador_puntuacion);
+                puntuacion.SetText(puntuacion_juego_actual.ToString());
+                bloquear_botones();
+                Invoke("poner_pregunta", 2);
+            }
+        }
+        
+        // poner_pregunta(actual_question_numero);
+    }
+
+    public void bloquear_botones()
+    {
+        button_res_1.interactable = false;
+        button_res_2.interactable = false;
+        button_res_3.interactable = false;
+        button_res_4.interactable = false;
+    }
+
+    public void desbloquear_botones()
+    {
+        button_res_1.interactable = true;
+        button_res_2.interactable = true;
+        button_res_3.interactable = true;
+        button_res_4.interactable = true;
     }
 
     public void llenar_pregunta(pregunta pregunta_en_turno, int[] orden)
@@ -156,10 +203,6 @@ public class main_screen : MonoBehaviour
         set_colores_respuestas(indices);
     }
 
-    public void get_cierto_pregunta()
-    {
-
-    }
     public Color get_colores_respuestas(int id_respuesta)
     {
         bool es_correcto = quiz.arreglo_preguntas[actual_question_numero].arreglo_respuestas[id_respuesta].correct;
@@ -171,21 +214,34 @@ public class main_screen : MonoBehaviour
     }
     public void set_colores_respuestas(int[] indices)
     {
+        Color c;
         ColorBlock cb;
         cb = button_res_1.colors;
-        cb.pressedColor = get_colores_respuestas(indices[0]-1);
+        c = get_colores_respuestas(indices[0] - 1);
+        //cb.pressedColor = c;
+        //cb.selectedColor = c;
+        cb.disabledColor = c;
         button_res_1.colors = cb;
 
-        cb = button_res_1.colors;
-        cb.pressedColor = get_colores_respuestas(indices[1]-1);
+        cb = button_res_2.colors;
+        c = get_colores_respuestas(indices[1] - 1);
+        //cb.pressedColor = c;
+        //cb.selectedColor = c;
+        cb.disabledColor = c;
         button_res_2.colors = cb;
 
-        cb = button_res_1.colors;
-        cb.pressedColor = get_colores_respuestas(indices[2]-1);
+        cb = button_res_3.colors;
+        c = get_colores_respuestas(indices[2] - 1);
+        //cb.pressedColor = c;
+        //cb.selectedColor = c;
+        cb.disabledColor = c;
         button_res_3.colors = cb;
 
-        cb = button_res_1.colors;
-        cb.pressedColor = get_colores_respuestas(indices[3]-1);
+        cb = button_res_4.colors;
+        c = get_colores_respuestas(indices[3] - 1);
+        //cb.pressedColor = c;
+        //cb.selectedColor = c;
+        cb.disabledColor = c;
         button_res_4.colors = cb;
     }
 
@@ -193,19 +249,27 @@ public class main_screen : MonoBehaviour
     {
         ColorBlock cb;
         cb = button_res_1.colors;
-        cb.pressedColor = Color.gray;
+        //cb.pressedColor = Color.gray;
+        //cb.selectedColor = Color.gray;
+        cb.disabledColor = Color.gray;
         button_res_1.colors = cb;
 
-        cb = button_res_1.colors;
-        cb.pressedColor = Color.gray;
+        cb = button_res_2.colors;
+        //cb.pressedColor = Color.gray;
+        //cb.selectedColor = Color.gray;
+        cb.disabledColor = Color.gray;
         button_res_2.colors = cb;
 
-        cb = button_res_1.colors;
-        cb.pressedColor = Color.gray;
+        cb = button_res_3.colors;
+        //cb.pressedColor = Color.gray;
+        //cb.selectedColor = Color.gray;
+        cb.disabledColor = Color.gray;
         button_res_3.colors = cb;
 
-        cb = button_res_1.colors;
-        cb.pressedColor = Color.gray;
+        cb = button_res_4.colors;
+        //cb.pressedColor = Color.gray;
+        //cb.selectedColor = Color.gray;
+        cb.disabledColor = Color.gray;
         button_res_4.colors = cb;
     }
 
