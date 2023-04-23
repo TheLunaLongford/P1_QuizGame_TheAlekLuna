@@ -102,7 +102,7 @@
 			"arreglo_respuestas":
 				[
 					{
-						"texto":"Flauta",
+						"texto":"Ocarina",
 				    	"correct":true
 					},
 					{
@@ -110,7 +110,7 @@
 				    	"correct":false
 					},
 					{
-						"texto":"Ocarina",
+						"texto":"Flauta",
 				    	"correct":false
 					},
 					{

@@ -37,26 +37,41 @@ public class main_screen : MonoBehaviour
     public TextMeshProUGUI res_2;
     public TextMeshProUGUI res_3;
     public TextMeshProUGUI res_4;
-    public TextMeshProUGUI puntuacion;
-
+    
     public Button button_res_1;
     public Button button_res_2;
     public Button button_res_3;
     public Button button_res_4;
+
+    public TextMeshProUGUI puntuacion;
+    int puntuacion_juego_actual;
+
+    public TextMeshProUGUI puntuacion_final;
+    public TextMeshProUGUI record;
 
     public void seleccion_dificultad()
     {
         pantalla_juego.gameObject.SetActive(false);
         pantalla_principal.gameObject.SetActive(false);
         pantalla_dificultad.gameObject.SetActive(true);
-        //pantalla_score.gameObject.SetActive(false);
+        pantalla_score.gameObject.SetActive(false);
     }
+    public void mostrar_puntuacion()
+    {
+        pantalla_juego.gameObject.SetActive(false);
+        pantalla_principal.gameObject.SetActive(false);
+        pantalla_dificultad.gameObject.SetActive(true);
+        pantalla_score.gameObject.SetActive(true);
+
+        puntuacion_final.SetText(puntuacion_juego_actual.ToString());
+    }
+
     public void comenzar_juego()
     {
         pantalla_juego.gameObject.SetActive(true);
         pantalla_principal.gameObject.SetActive(false);
         pantalla_dificultad.gameObject.SetActive(false);
-        //pantalla_score.gameObject.SetActive(false);
+        pantalla_score.gameObject.SetActive(false);
 
         // Dependiente de que difultad fue elegida, se cargara un archivo de preguntas u otro
         string button_name = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
@@ -76,40 +91,63 @@ public class main_screen : MonoBehaviour
         }
 
         quiz = shuffle_quiz(quiz);
+        // Setear valores de inicio de juego
         actual_question_numero = 0;
+        puntuacion_juego_actual = 0;
+        puntuacion.SetText(puntuacion_juego_actual.ToString());
+
         poner_pregunta(actual_question_numero);
-        DumpToConsole(quiz);
+        //DumpToConsole(quiz);
     }
 
     public void poner_pregunta(int numero_pregunta)
     {
-        pregunta pregunta_random = quiz.arreglo_preguntas[numero_pregunta];
-        int numero_respuestas = pregunta_random.arreglo_respuestas.Length;
-        int[] indices = shuffle_range(numero_respuestas);
+        if (actual_question_numero < 10)
+        {
+            pregunta pregunta_random = quiz.arreglo_preguntas[numero_pregunta];
+            int numero_respuestas = pregunta_random.arreglo_respuestas.Length;
+            int[] indices = shuffle_range(numero_respuestas);
 
-        llenar_pregunta(pregunta_random, indices);
-        ajustar_colores_botones(indices);
-        centrar_botones();
-        ubicar_botones();
-        actual_question_numero += 1;
+            llenar_pregunta(pregunta_random, indices);
+            ajustar_colores_botones(indices);
+            centrar_botones();
+            ubicar_botones();
+            actual_question_numero += 1;
+        }
+        else
+        {
+            mostrar_puntuacion();
+        }
     }
 
     public void click_respuesta()
     {
-        poner_pregunta(actual_question_numero);
-        if (actual_question_numero == 10)
+        GameObject boton_clickeado = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        if (boton_clickeado.GetComponent<data_pregunta>().correcto)
         {
-
-        }
+            puntuacion_juego_actual += boton_clickeado.GetComponent<data_pregunta>().valor_puntos;
+            puntuacion.SetText(puntuacion_juego_actual.ToString());
+        }    
+        poner_pregunta(actual_question_numero);
     }
 
     public void llenar_pregunta(pregunta pregunta_en_turno, int[] orden)
     {
         pregunta.SetText(pregunta_en_turno.texto);
-        res_1.SetText(pregunta_en_turno.arreglo_respuestas[orden[0] - 1].texto);
-        res_2.SetText(pregunta_en_turno.arreglo_respuestas[orden[1] - 1].texto);
+        res_1.SetText(pregunta_en_turno.arreglo_respuestas[orden[0] - 1].texto);        
+        res_2.SetText(pregunta_en_turno.arreglo_respuestas[orden[1] - 1].texto);        
         res_3.SetText(pregunta_en_turno.arreglo_respuestas[orden[2] - 1].texto);
         res_4.SetText(pregunta_en_turno.arreglo_respuestas[orden[3] - 1].texto);
+        
+        button_res_1.GetComponent<data_pregunta>().correcto = pregunta_en_turno.arreglo_respuestas[orden[0] - 1].correct;
+        button_res_2.GetComponent<data_pregunta>().correcto = pregunta_en_turno.arreglo_respuestas[orden[1] - 1].correct;
+        button_res_3.GetComponent<data_pregunta>().correcto = pregunta_en_turno.arreglo_respuestas[orden[2] - 1].correct;
+        button_res_4.GetComponent<data_pregunta>().correcto = pregunta_en_turno.arreglo_respuestas[orden[3] - 1].correct;
+
+        button_res_1.GetComponent<data_pregunta>().valor_puntos = pregunta_en_turno.valor_pregunta;
+        button_res_2.GetComponent<data_pregunta>().valor_puntos = pregunta_en_turno.valor_pregunta;
+        button_res_3.GetComponent<data_pregunta>().valor_puntos = pregunta_en_turno.valor_pregunta;
+        button_res_4.GetComponent<data_pregunta>().valor_puntos = pregunta_en_turno.valor_pregunta;
     }
 
     public void ajustar_colores_botones(int[] indices)
@@ -118,6 +156,10 @@ public class main_screen : MonoBehaviour
         set_colores_respuestas(indices);
     }
 
+    public void get_cierto_pregunta()
+    {
+
+    }
     public Color get_colores_respuestas(int id_respuesta)
     {
         bool es_correcto = quiz.arreglo_preguntas[actual_question_numero].arreglo_respuestas[id_respuesta].correct;
