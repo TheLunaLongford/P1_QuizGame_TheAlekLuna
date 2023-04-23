@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class main_screen : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class main_screen : MonoBehaviour
     public Canvas pantalla_score;
 
     // UI Elements : Buttons
-    // public GameObject boton_empezar;
     public Button button_res_1;
     public Button button_res_2;
     public Button button_res_3;
@@ -55,6 +55,14 @@ public class main_screen : MonoBehaviour
     double multiplicador_puntuacion;
     public Button omitir;
     public Button terminar;
+    public TextMeshProUGUI new_record;
+    public Image character;
+    float tiempo_restante;
+    bool tiempo_bandera;
+    public TextMeshProUGUI timer;
+    public TextMeshProUGUI record_main;
+    public Button pista;
+
 
     public void seleccion_dificultad()
     {
@@ -70,7 +78,63 @@ public class main_screen : MonoBehaviour
         pantalla_dificultad.gameObject.SetActive(true);
         pantalla_score.gameObject.SetActive(true);
 
+        int record_puntos = PlayerPrefs.GetInt("record", 0);
+        if (puntuacion_juego_actual > record_puntos)
+        {
+            PlayerPrefs.SetInt("record", puntuacion_juego_actual);
+            record_puntos = puntuacion_juego_actual;
+            new_record.alpha = 1.0f;
+        }
         puntuacion_final.SetText(puntuacion_juego_actual.ToString());
+        record.SetText(record_puntos.ToString());
+    }
+
+    public void gastar_pista()
+    {
+        if (puntuacion_juego_actual >= 300)
+        {
+            int pistas_eliminadas = 0;
+            int boton_random = 0;
+            do
+            {
+                boton_random = Random.Range(1, 4);
+                switch (boton_random)
+                {
+                    case 1:
+                        if (button_res_1.interactable == true & button_res_1.GetComponent<data_pregunta>().correcto == false)
+                        {
+                            pistas_eliminadas++;
+                            button_res_1.interactable = false;
+                        }
+                        break;
+                    case 2:
+                        if (button_res_2.interactable == true & button_res_2.GetComponent<data_pregunta>().correcto == false)
+                        {
+                            pistas_eliminadas++;
+                            button_res_2.interactable = false;
+                        }
+                        break;
+                    case 3:
+                        if (button_res_3.interactable == true & button_res_3.GetComponent<data_pregunta>().correcto == false)
+                        {
+                            pistas_eliminadas++;
+                            button_res_3.interactable = false;
+                        }
+                        break;
+                    case 4:
+                        if (button_res_4.interactable == true & button_res_4.GetComponent<data_pregunta>().correcto == false)
+                        {
+                            pistas_eliminadas++;
+                            button_res_4.interactable = false;
+                        }
+                        break;
+                }
+            } while (pistas_eliminadas < 2);
+            puntuacion_juego_actual -= 300;
+            puntuacion_final.SetText(puntuacion_juego_actual.ToString());
+        }
+        
+
     }
 
     public void comenzar_juego()
@@ -111,6 +175,8 @@ public class main_screen : MonoBehaviour
     {
         dummy.Select();
         desbloquear_botones();
+        tiempo_bandera = true;
+        tiempo_restante = 11;
         if (actual_question_numero < 10)
         {
             pregunta pregunta_random = quiz.arreglo_preguntas[actual_question_numero];
@@ -121,6 +187,7 @@ public class main_screen : MonoBehaviour
             ajustar_colores_botones(indices);
             centrar_botones();
             ubicar_botones();
+            navi_color(1);
             segunda_oportunidad = true;
             actual_question_numero += 1;
             multiplicador_puntuacion = 1;
@@ -131,6 +198,39 @@ public class main_screen : MonoBehaviour
         }
     }
 
+    public void navi_color(int color)
+    {
+        Color navi_color = new Color();
+        navi_color.a = 1;
+        switch (color)
+        {
+            // Neutral
+            case 1:
+                navi_color.r = 255;
+                navi_color.g = 255;
+                navi_color.b = 255;
+                character.color = navi_color;
+                break;
+
+            // Enojado
+            case 2:
+                navi_color.r = 255;
+                navi_color.g = 0;
+                navi_color.b = 0;
+                character.color = navi_color;
+                break;
+
+            // Feliz
+            case 3:
+                navi_color.r = 0;
+                navi_color.g = 255;
+                navi_color.b = 0;
+                character.color = navi_color;
+                break;
+        }
+        
+    }
+
     public void click_respuesta()
     {
         GameObject boton_clickeado = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
@@ -139,10 +239,14 @@ public class main_screen : MonoBehaviour
             puntuacion_juego_actual +=  (int)((double)boton_clickeado.GetComponent<data_pregunta>().valor_puntos * multiplicador_puntuacion);
             puntuacion.SetText(puntuacion_juego_actual.ToString());
             bloquear_botones();
+            navi_color(3);
+            tiempo_bandera = false;
             Invoke("poner_pregunta", 2);
         }
         else
         {
+            tiempo_restante = 11;
+            navi_color(2);
             if (segunda_oportunidad)
             {
                 segunda_oportunidad = false;
@@ -155,11 +259,10 @@ public class main_screen : MonoBehaviour
                 puntuacion_juego_actual += (int)((double)boton_clickeado.GetComponent<data_pregunta>().valor_puntos * multiplicador_puntuacion);
                 puntuacion.SetText(puntuacion_juego_actual.ToString());
                 bloquear_botones();
+                tiempo_bandera = false;
                 Invoke("poner_pregunta", 2);
             }
         }
-        
-        // poner_pregunta(actual_question_numero);
     }
 
     public void bloquear_botones()
@@ -168,6 +271,8 @@ public class main_screen : MonoBehaviour
         button_res_2.interactable = false;
         button_res_3.interactable = false;
         button_res_4.interactable = false;
+        omitir.interactable = false;
+        pista.interactable = false;
     }
 
     public void desbloquear_botones()
@@ -176,6 +281,8 @@ public class main_screen : MonoBehaviour
         button_res_2.interactable = true;
         button_res_3.interactable = true;
         button_res_4.interactable = true;
+        omitir.interactable = true;
+        pista.interactable = true;
     }
 
     public void llenar_pregunta(pregunta pregunta_en_turno, int[] orden)
@@ -212,35 +319,28 @@ public class main_screen : MonoBehaviour
         }
         return Color.red;
     }
+
     public void set_colores_respuestas(int[] indices)
     {
         Color c;
         ColorBlock cb;
         cb = button_res_1.colors;
         c = get_colores_respuestas(indices[0] - 1);
-        //cb.pressedColor = c;
-        //cb.selectedColor = c;
         cb.disabledColor = c;
         button_res_1.colors = cb;
 
         cb = button_res_2.colors;
         c = get_colores_respuestas(indices[1] - 1);
-        //cb.pressedColor = c;
-        //cb.selectedColor = c;
         cb.disabledColor = c;
         button_res_2.colors = cb;
 
         cb = button_res_3.colors;
         c = get_colores_respuestas(indices[2] - 1);
-        //cb.pressedColor = c;
-        //cb.selectedColor = c;
         cb.disabledColor = c;
         button_res_3.colors = cb;
 
         cb = button_res_4.colors;
         c = get_colores_respuestas(indices[3] - 1);
-        //cb.pressedColor = c;
-        //cb.selectedColor = c;
         cb.disabledColor = c;
         button_res_4.colors = cb;
     }
@@ -249,26 +349,18 @@ public class main_screen : MonoBehaviour
     {
         ColorBlock cb;
         cb = button_res_1.colors;
-        //cb.pressedColor = Color.gray;
-        //cb.selectedColor = Color.gray;
         cb.disabledColor = Color.gray;
         button_res_1.colors = cb;
 
         cb = button_res_2.colors;
-        //cb.pressedColor = Color.gray;
-        //cb.selectedColor = Color.gray;
         cb.disabledColor = Color.gray;
         button_res_2.colors = cb;
 
         cb = button_res_3.colors;
-        //cb.pressedColor = Color.gray;
-        //cb.selectedColor = Color.gray;
         cb.disabledColor = Color.gray;
         button_res_3.colors = cb;
 
         cb = button_res_4.colors;
-        //cb.pressedColor = Color.gray;
-        //cb.selectedColor = Color.gray;
         cb.disabledColor = Color.gray;
         button_res_4.colors = cb;
     }
@@ -304,25 +396,58 @@ public class main_screen : MonoBehaviour
         return shuffle_quiz;
     }
 
-
-
-
-
-
-
     public void regresar_home()
+    {
+        // Reiniciar
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void inicializar_pantallas()
     {
         pantalla_juego.gameObject.SetActive(false);
         pantalla_principal.gameObject.SetActive(true);
         pantalla_dificultad.gameObject.SetActive(false);
-        //pantalla_score.gameObject.SetActive(false);
+        pantalla_score.gameObject.SetActive(false);
+        // Setting record value to 0 when starting
+        record_main.SetText(PlayerPrefs.GetInt("record", 0).ToString());
+        // Descomentar si quremos que se borre, TODO: agregarlo como boton.
+        // PlayerPrefs.SetInt("record", puntuacion_juego_actual);
+        new_record.alpha = 0.0f;
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         cargar_preguntas();
-        regresar_home();
+        inicializar_pantallas();
+        tiempo_bandera = false;
     }
+
+    void Update()
+    {
+        if (tiempo_bandera)
+        {
+            if(tiempo_restante >= 1)
+            {
+                tiempo_restante -= Time.deltaTime;
+                actualizar_timer();
+            }
+            else
+            {
+                bloquear_botones();
+                navi_color(2);
+                tiempo_bandera = false;
+                Invoke("poner_pregunta", 2);
+            }
+        }
+       
+    }
+
+    public void actualizar_timer()
+    {
+        float segundos = Mathf.FloorToInt(tiempo_restante % 60);
+        timer.SetText(string.Format("00:{0:00}", segundos));
+    }
+
     public void cargar_preguntas()
     {
         texto_preguntas_easy = archivo_easy.text;
